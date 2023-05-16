@@ -21,10 +21,14 @@ export default function Card() {
                 <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
                   {item?.category}
                 </h3>
-                <Link
+                {/* <Link
                   href={`/shop/${item?.title
                     .toLowerCase()
                     .replace(/\s+/g, "-")}`}
+                  className="text-white title-font text-lg font-medium"
+                > */}
+                <Link
+                  href={`/shop/${encodeURIComponent(item?.id)}`}
                   className="text-white title-font text-lg font-medium"
                 >
                   {item?.title}

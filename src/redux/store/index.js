@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { createWrapper } from "next-redux-wrapper";
 import productsReducers from "../slice/slice-products";
 import userReducers from "../slice/slice-token";
+import cartReducers from "../slice/slice-cart";
 
 const persistConfig = {
   key: "root",
@@ -14,6 +15,7 @@ const persistConfig = {
 const rootReducers = combineReducers({
   products: productsReducers,
   users: userReducers,
+  cart: cartReducers,
 });
 
 const persist = persistReducer(persistConfig, rootReducers);

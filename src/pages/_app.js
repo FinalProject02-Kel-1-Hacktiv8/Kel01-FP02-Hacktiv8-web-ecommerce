@@ -13,7 +13,7 @@ export default function App({ Component, ...rest }) {
     <Provider store={store}>
       <PersistGate persistor={persistore}>
         <QueryClientProvider client={queryClient}>
-          <Component {...props} />
+          <Component {...props.pageProps} />
         </QueryClientProvider>
       </PersistGate>
     </Provider>

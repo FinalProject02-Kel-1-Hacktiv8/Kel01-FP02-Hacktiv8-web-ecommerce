@@ -3,13 +3,14 @@ import CardDetails from "@/components/CardDetails";
 import Navbar from "@/components/Navbar";
 import React from "react";
 
-export default function DetailProduct() {
+export default function DetailProduct({ detailPage }) {
+  console.log("details", detailPage);
   return (
     <div className="container mx-auto mt-5">
       <Navbar />
       <section class="text-gray-400 body-font overflow-hidden">
         <div class="container px-5 py-24 mx-auto">
-          <CardDetails />
+          <CardDetails data={detailPage} />
         </div>
       </section>
     </div>
@@ -19,7 +20,9 @@ export default function DetailProduct() {
 export async function getStaticPaths() {
   const data = await getData("/products");
   const paths = data.map((item) => ({
-    params: item?.id,
+    params: {
+      id: item?.id.toString(),
+    },
   }));
   return {
     paths,
@@ -29,8 +32,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { id } = params;
-  console.log("id", id);
+  const data = await getData(`/products/${id}`);
+  console.log(data);
   return {
-    props: {},
+    props: {
+      detailPage: data,
+    },
   };
 }
