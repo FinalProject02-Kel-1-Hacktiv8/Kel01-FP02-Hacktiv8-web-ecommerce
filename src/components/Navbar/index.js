@@ -1,8 +1,11 @@
 import React from "react";
 import Navlink from "./Navlink";
 import NavEnd from "./NavEnd";
+import { useSelector } from "react-redux";
 
 export default function NavbarComponent() {
+  const { token } = useSelector((state) => state.users);
+  console.log("token", token);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -37,7 +40,7 @@ export default function NavbarComponent() {
         <Navlink item="checkout" href="/checkout" />
       </div>
       <div className="navbar-end">
-        <NavEnd isToken />
+        {!token ? <NavEnd /> : <NavEnd isToken />}
       </div>
     </div>
   );

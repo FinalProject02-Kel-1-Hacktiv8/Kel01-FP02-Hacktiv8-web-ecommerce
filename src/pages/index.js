@@ -1,4 +1,5 @@
 import Card from "@/components/Card";
+import Carousel from "@/components/Carousel";
 import Navbar from "@/components/Navbar";
 import { fetchDataProduct } from "@/redux/slice/slice-products";
 import { useEffect } from "react";
@@ -16,7 +17,9 @@ export default function Home() {
   return (
     <div className="container mx-auto mt-5">
       <Navbar />
+      {/* <Carousel /> */}
       <Card />
+      {/* <Carousel /> */}
     </div>
   );
 }

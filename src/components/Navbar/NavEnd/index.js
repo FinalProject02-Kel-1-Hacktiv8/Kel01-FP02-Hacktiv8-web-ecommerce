@@ -1,6 +1,11 @@
+import Button from "@/components/Button";
+import { deleteToken } from "@/redux/slice/slice-token";
+import Link from "next/link";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 export default function NavEnd({ isToken }) {
+  const dispatch = useDispatch();
   return isToken ? (
     <>
       <div className="dropdown dropdown-end mr-5">
@@ -56,7 +61,7 @@ export default function NavEnd({ isToken }) {
             <a>Settings</a>
           </li>
           <li>
-            <a>Logout</a>
+            <a onClick={() => dispatch(deleteToken())}>Logout</a>
           </li>
         </ul>
       </div>
@@ -97,7 +102,11 @@ export default function NavEnd({ isToken }) {
         </div>
       </div>
       <div className="navbar-end">
-        <a className="btn">Get started</a>
+        {/* <Button type="button" >Get started</Button> */}
+        <Link className="btn" href="/signin">
+          Login
+        </Link>
+        {/* <a className="btn">Get started</a> */}
       </div>
     </>
   );

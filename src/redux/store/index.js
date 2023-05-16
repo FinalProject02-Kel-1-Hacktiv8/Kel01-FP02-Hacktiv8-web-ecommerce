@@ -1,14 +1,28 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { createWrapper } from "next-redux-wrapper";
-import sliceProducts from "../slice/slice-products";
+import productsReducers from "../slice/slice-products";
+import userReducers from "../slice/slice-token";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  version: 1,
+};
 
 const rootReducers = combineReducers({
-  products: sliceProducts,
+  products: productsReducers,
+  users: userReducers,
 });
+
+const persist = persistReducer(persistConfig, rootReducers);
 
 const store = () =>
   configureStore({
-    reducer: rootReducers,
+    reducer: persist,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({ serializableCheck: false }),
   });
 
 export const wrapper = createWrapper(store);

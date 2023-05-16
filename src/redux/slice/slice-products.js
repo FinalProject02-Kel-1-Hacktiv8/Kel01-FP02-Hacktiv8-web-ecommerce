@@ -31,9 +31,9 @@ const productSlice = createSlice({
       };
     });
     builder.addCase(fetchDataProduct.rejected, (state, action) => {
-      (state.status = "error"),
-        (state.error = action.error.message),
-        (state.loading = false);
+      state.status = "error";
+      state.error = action.error.message;
+      state.loading = false;
     });
   },
 });
