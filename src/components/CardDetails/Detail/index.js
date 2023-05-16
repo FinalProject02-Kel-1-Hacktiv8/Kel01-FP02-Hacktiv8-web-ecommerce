@@ -7,9 +7,11 @@ export default function Detail({ item }) {
   const dispatch = useDispatch();
   const { token } = useSelector((state) => state.users);
   const router = useRouter();
-  // const handleAddItem = (i) => {
-  //   dispatch(addCart(i));
-  // };
+
+  const handleAddItem = (i) => {
+    dispatch(addCart(i));
+    router.replace("/checkout");
+  };
   return (
     <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
       <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -90,7 +92,7 @@ export default function Detail({ item }) {
           <button
             type="button"
             className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded"
-            onClick={() => dispatch(addCart(item))}
+            onClick={() => handleAddItem(item)}
           >
             Add To Cart
           </button>
