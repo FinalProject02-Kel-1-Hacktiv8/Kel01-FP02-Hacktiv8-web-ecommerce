@@ -28,7 +28,7 @@ export default function NavbarComponent() {
           <Navlink item="calaboration" href="/calaboration" isMobile />
           <Navlink item="checkout" href="/checkout" isMobile />
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-xl">TOKOku.id</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <Navlink item="home" href="/" />
