@@ -15,6 +15,7 @@ const productSlice = createSlice({
     status: "idle",
     loading: false,
     data: [],
+    productDetails: {},
     error: null,
   },
   extraReducers: (builder) => {
@@ -23,12 +24,13 @@ const productSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchDataProduct.fulfilled, (state, action) => {
-      return {
-        ...state,
-        status: "success",
-        loading: false,
-        data: action.payload,
-      };
+      (state.status = "success"),
+        (state.loading = false),
+        (state.data = action.payload),
+        action.payload.map(
+          (dataProduct) =>
+            (state.productDetails[dataProduct.title] = dataProduct)
+        );
     });
     builder.addCase(fetchDataProduct.rejected, (state, action) => {
       (state.status = "error"),
