@@ -1,13 +1,11 @@
 import React from "react";
 import Summary from "./Summary";
-import DetailPayments from "./DetailPayment";
+import { useSelector } from "react-redux";
 
 export default function Payment() {
+  const { subTotal, shipping } = useSelector((state) => state.cart);
+  const totals = parseFloat(subTotal) + shipping;
   return (
-    // <div class="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 lg:mt-20">
-    //   <Summary />
-    //   <DetailPayments />
-    // </div>
     <section class="h-screen py-12 sm:py-16 lg:py-20 mb-10">
       <div class="mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div class="flex items-center justify-center">
@@ -22,18 +20,20 @@ export default function Payment() {
               <div class="mt-6 border-t border-b py-2">
                 <div class="flex items-center justify-between">
                   <p class="text-sm text-gray-400">Subtotal</p>
-                  <p class="text-lg font-semibold text-gray-900">$399.00</p>
+                  <p class="text-lg font-semibold text-gray-900">
+                    $ {subTotal.toFixed(2)}
+                  </p>
                 </div>
                 <div class="flex items-center justify-between">
                   <p class="text-sm text-gray-400">Shipping</p>
-                  <p class="text-lg font-semibold text-gray-900">$8.00</p>
+                  <p class="text-lg font-semibold text-gray-900">{shipping}</p>
                 </div>
               </div>
               <div class="mt-6 flex items-center justify-between">
                 <p class="text-sm font-medium text-gray-900">Total</p>
                 <p class="text-2xl font-semibold text-gray-900">
                   <span class="text-xs font-normal text-gray-400">USD</span>{" "}
-                  408.00
+                  {totals.toFixed(2)}
                 </p>
               </div>
 

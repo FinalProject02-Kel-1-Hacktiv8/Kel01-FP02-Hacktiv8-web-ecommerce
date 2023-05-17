@@ -5,36 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Summary() {
   const { items } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const handleRemoveItem = (id) => {
-    dispatch(removeItem(id));
-  };
 
-  const handleAddItem = (i) => {
-    dispatch(addCart(i));
-  };
   return (
-    // <div class="px-4 pt-8">
-    //   <p class="text-xl font-medium">Order Summary</p>
-    //   <p class="text-gray-400">
-    //     Check your items. And select a suitable shipping method.
-    //   </p>
-    //   <div class="mt-8 space-y-3 rounded-lg border bg-gray-700 border-gray-600 px-2 py-4 sm:px-6">
-    //     {items?.map((item) => (
-    //       <div class="flex flex-col rounded-lg sm:flex-row">
-    //         <img
-    //           class="m-2 h-24 w-28 rounded-md border object-cover object-center"
-    //           src={item?.image}
-    //           alt=""
-    //         />
-    //         <div class="flex w-full flex-col px-4 py-4">
-    //           <span class="font-semibold">{item?.title}</span>
-    //           <span class="float-right text-gray-400">{item?.category}</span>
-    //           <p class="text-lg font-bold">$ {item?.price}</p>
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </div>
     <div class="flow-root">
       <ul class="-my-8">
         {items?.map((item) => (
@@ -67,7 +39,7 @@ export default function Summary() {
                     <div class="mx-auto flex h-8 items-stretch text-gray-600">
                       <button
                         class="flex items-center justify-center rounded-l-md bg-gray-200 px-4 transition hover:bg-black hover:text-white"
-                        onClick={() => handleRemoveItem(item?.id)}
+                        onClick={() => dispatch(removeItem(item))}
                       >
                         -
                       </button>
@@ -76,7 +48,7 @@ export default function Summary() {
                       </div>
                       <button
                         class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white"
-                        onClick={() => handleAddItem(item)}
+                        onClick={() => dispatch(addCart(item))}
                       >
                         +
                       </button>
@@ -89,7 +61,7 @@ export default function Summary() {
                 <button
                   type="button"
                   class="flex rounded p-2 text-center text-gray-500 transition-all duration-200 ease-in-out focus:shadow hover:text-gray-900"
-                  onClick={() => handleRemoveItem(item?.id)}
+                  onClick={() => dispatch(removeItem(item))}
                 >
                   <svg
                     class="h-5 w-5"
