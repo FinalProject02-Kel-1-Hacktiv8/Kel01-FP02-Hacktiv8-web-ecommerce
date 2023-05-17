@@ -17,6 +17,7 @@
     "eslint-config-next": "13.4.2",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.4",
+    "moment": "^2.29.4",
     "next": "13.4.2",
     "next-redux-wrapper": "^8.1.0",
     "postcss": "8.4.23",

@@ -1,10 +1,40 @@
 import React from "react";
 import Summary from "./Summary";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useMutation } from "react-query";
+import { postData } from "@/Utils/fetch";
+import { useRouter } from "next/router";
+import moment from "moment";
+import { clearItem } from "@/redux/slice/slice-cart";
 
 export default function Payment() {
-  const { subTotal, shipping } = useSelector((state) => state.cart);
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { subTotal, shipping, items } = useSelector((state) => state.cart);
   const totals = parseFloat(subTotal) + shipping;
+  const cartP = [];
+  for (const item of items) {
+    cartP.push({ productId: item.id, quantity: item.quantity });
+  }
+  const today = new Date();
+  const payload = {
+    userId: 1,
+    date: moment(today).format("YYYY-MM-DD"),
+    products: cartP,
+  };
+
+  const addCartMutation = useMutation((data) => postData("/carts", data), {
+    onSuccess: (res) => {
+      console.log("resCart", res);
+      // router.replace("/");
+      dispatch(clearItem());
+    },
+  });
+
+  const handleCheckout = async () => {
+    await addCartMutation.mutate(payload);
+  };
+  console.log("payload", payload);
   return (
     <section class="h-screen py-12 sm:py-16 lg:py-20 mb-10">
       <div class="mx-auto px-4 sm:px-6 lg:px-8 mb-10">
@@ -40,6 +70,7 @@ export default function Payment() {
               <div class="mt-6 text-center">
                 <button
                   type="button"
+                  onClick={() => handleCheckout()}
                   class="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
                 >
                   Checkout
