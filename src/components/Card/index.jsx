@@ -36,10 +36,10 @@ export const Card = ({ id, title, category, src, price, rate, count }) => {
               </h2>
               <p className="mt-1">
                 <i className="fa-solid fa-star text-yellow-400 mr-[5px]"></i>
-                {rate ?? "Product rate is not found"} | Sold {count}
+                {rate ?? "Product rate is not found"} | {count} Sold
               </p>
 
-              <p className="mt-1 font-semibold">
+              <p className="mt-1 font-semibold text-xl">
                 ${price ?? "Product price is not found"}
               </p>
             </div>
