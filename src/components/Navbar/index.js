@@ -23,18 +23,21 @@ export default function NavbarComponent() {
               />
             </svg>
           </label>
-          <Navlink item="home" href="/" isMobile />
-          <Navlink item="shop" href="shop" isMobile />
-          <Navlink item="calaboration" href="/calaboration" isMobile />
-          <Navlink item="checkout" href="/checkout" isMobile />
+          <Navlink item="Home" href="/" isMobile />
+          <Navlink item="Shop" href="shop" isMobile />
+          <Navlink item="Calaboration" href="/calaboration" isMobile />
+          <Navlink item="Checkout" href="/checkout" isMobile />
         </div>
-        <a className="btn btn-ghost normal-case text-xl">TOKOku.id</a>
+        {/* LOGO */}
+        <a className="btn btn-ghost normal-case text-xl text-purple-400">
+          TOKOku.id
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <Navlink item="home" href="/" />
-        <Navlink item="shop" href="/shop" />
-        <Navlink item="calaboration" href="/calaboration" />
-        <Navlink item="checkout" href="/checkout" />
+        <Navlink item="Home" href="/" />
+        <Navlink item="Shop" href="/shop" />
+        <Navlink item="Calaboration" href="/calaboration" />
+        <Navlink item="Checkout" href="/checkout" />
       </div>
       <div className="navbar-end">
         <NavEnd isToken />
