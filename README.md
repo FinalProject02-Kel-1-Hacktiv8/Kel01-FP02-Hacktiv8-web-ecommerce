@@ -1,4 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Final Project 02 Kel.01 - Web App Ecommerce
+
+This is The Final Project for Hacktiv8 by Making The Web Ecommerce using NEXT.JS
+
+## 👨‍💻 Team
+
+| Author            | Nim Hacktiv8  |
+| ----------------- | ------------- |
+| Rachmat Ghaly     | RCTN-KS07-015 |
+| Bilal Al Ghiffari | RCTN-KS07-006 |
+
+## 🛠️ Tech Stack & Tools
+
+- Next.Js
+- Redux Toolkit
+- Tailwind CSS
+- JavaScript
+- DaisyUI and Self Components
+- API from https://fakestoreapi.com/
 
 ## Getting Started
 
