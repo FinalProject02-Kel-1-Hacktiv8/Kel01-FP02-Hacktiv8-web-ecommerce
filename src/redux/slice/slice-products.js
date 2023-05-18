@@ -15,7 +15,7 @@ const productSlice = createSlice({
     status: "idle",
     loading: false,
     data: [],
-    productDetails: {},
+    // productDetails: {},
     error: null,
   },
   extraReducers: (builder) => {
@@ -26,11 +26,11 @@ const productSlice = createSlice({
     builder.addCase(fetchDataProduct.fulfilled, (state, action) => {
       (state.status = "success"),
         (state.loading = false),
-        (state.data = action.payload),
-        action.payload.map(
-          (dataProduct) =>
-            (state.productDetails[dataProduct.title] = dataProduct)
-        );
+        (state.data = action.payload);
+      // action.payload.map(
+      //   (dataProduct) =>
+      //     (state.productDetails[dataProduct.title] = dataProduct)
+      // );
     });
     builder.addCase(fetchDataProduct.rejected, (state, action) => {
       (state.status = "error"),
