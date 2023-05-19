@@ -26,7 +26,7 @@ export default function Payment() {
   const addCartMutation = useMutation((data) => postData("/carts", data), {
     onSuccess: (res) => {
       console.log("resCart", res);
-      // router.replace("/");
+      router.replace("/");
       dispatch(clearItem());
     },
   });

@@ -1,11 +1,21 @@
-import { addCart } from "@/redux/slice/slice-cart";
+import { addItem } from "@/redux/slice/slice-cart";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Card() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { data } = useSelector((state) => state.products);
+  const { token } = useSelector((state) => state.users);
+  const handleAddCart = (item) => {
+    if (!token) {
+      router.push("/signin");
+    } else {
+      dispatch(addItem(item));
+    }
+  };
   return (
     <div className="container px-5 py-24 mx-auto">
       <div className="flex flex-wrap -m-4">
@@ -36,7 +46,7 @@ export default function Card() {
                   </p>
                 </div>
                 <div
-                  onClick={() => dispatch(addCart(item))}
+                  onClick={() => handleAddCart(item)}
                   class="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300 cursor-pointer"
                 >
                   <svg
@@ -61,40 +71,5 @@ export default function Card() {
         ))}
       </div>
     </div>
-    // <section className="text-gray-400 body-font">
-    //   <div className="container px-5 py-24 mx-auto">
-    //     <div className="flex flex-wrap -m-4">
-    //       {data?.map((item) => (
-    //         <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={item?.id}>
-    //           <a className="block relative h-48 rounded overflow-hidden">
-    //             <img
-    //               alt="ecommerce"
-    //               className="object-cover object-center w-full h-full block"
-    //               src={item?.image}
-    //             />
-    //           </a>
-    //           <div className="mt-4">
-    //             <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-    //               {item?.category}
-    //             </h3>
-    //             {/* <Link
-    //               href={`/shop/${item?.title
-    //                 .toLowerCase()
-    //                 .replace(/\s+/g, "-")}`}
-    //               className="text-white title-font text-lg font-medium"
-    //             > */}
-    //             <Link
-    //               href={`/shop/${encodeURIComponent(item?.id)}`}
-    //               className="text-white title-font text-lg font-medium"
-    //             >
-    //               {item?.title}
-    //             </Link>
-    //             <p className="mt-1">{item?.price}</p>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </section>
   );
 }

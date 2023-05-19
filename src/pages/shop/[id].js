@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 
 export default function DetailProduct({ detailPage }) {
-  console.log("details", detailPage);
   return (
     <div className="container mx-auto mt-5">
       <Navbar />
@@ -33,7 +32,6 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { id } = params;
   const data = await getData(`/products/${id}`);
-  console.log(data);
   return {
     props: {
       detailPage: data,

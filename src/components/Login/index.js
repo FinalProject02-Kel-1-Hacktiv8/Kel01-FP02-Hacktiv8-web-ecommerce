@@ -24,7 +24,7 @@ export default function Login() {
     {
       onSuccess: (res) => {
         dispatch(addToken(res.token));
-        router.push("/");
+        router.prefetch("/");
       },
     }
   );

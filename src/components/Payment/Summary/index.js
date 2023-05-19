@@ -1,11 +1,13 @@
-import { addCart, removeItem } from "@/redux/slice/slice-cart";
+import { addItem, removeCart, removeItem } from "@/redux/slice/slice-cart";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Summary() {
   const { items } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
+  const handleAddCart = (item) => {
+    dispatch(addItem(item));
+  };
   return (
     <div class="flow-root">
       <ul class="-my-8">
@@ -28,6 +30,10 @@ export default function Summary() {
                   <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">
                     {item?.category}
                   </p>
+                  <span className="flex items-center mt-3">
+                    <span className="">stock</span>
+                    <span className="ml-3">{item?.stock}</span>
+                  </span>
                 </div>
 
                 <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
@@ -46,12 +52,22 @@ export default function Summary() {
                       <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">
                         {item?.quantity}
                       </div>
-                      <button
-                        class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white"
-                        onClick={() => dispatch(addCart(item))}
-                      >
-                        +
-                      </button>
+                      {item?.stock <= 1 ? (
+                        <button
+                          disabled
+                          class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white"
+                          onClick={() => handleAddCart(item)}
+                        >
+                          +
+                        </button>
+                      ) : (
+                        <button
+                          class="flex items-center justify-center rounded-r-md bg-gray-200 px-4 transition hover:bg-black hover:text-white"
+                          onClick={() => handleAddCart(item)}
+                        >
+                          +
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -61,7 +77,7 @@ export default function Summary() {
                 <button
                   type="button"
                   class="flex rounded p-2 text-center text-gray-500 transition-all duration-200 ease-in-out focus:shadow hover:text-gray-900"
-                  onClick={() => dispatch(removeItem(item))}
+                  onClick={() => dispatch(removeCart(item?.id))}
                 >
                   <svg
                     class="h-5 w-5"
