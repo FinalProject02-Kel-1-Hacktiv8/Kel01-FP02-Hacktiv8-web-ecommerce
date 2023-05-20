@@ -49,18 +49,23 @@ export const cartSlice = createSlice({
     removeCart: (state, action) => {
       const id = action.payload;
       const existingItem = state.items.find((item) => item.id === id);
-
       if (existingItem) {
         state.items = state.items.filter((item) => item.id !== id);
         state.totalQuantity = state.totalQuantity - existingItem.quantity;
-        state.subTotal = state.subTotal - existingItem.price;
+
+        if (state.totalQuantity === 0) {
+          state.subTotal = 0;
+        } else {
+          const priceAndQuantity = existingItem.price * existingItem.quantity;
+          state.subTotal -= priceAndQuantity;
+        }
       }
     },
-    clearItem: (state) => {
-      state.totalQuantity = 0;
-      state.subTotal = 0;
-      state.items = [];
-    },
+  },
+  clearItem: (state) => {
+    state.totalQuantity = 0;
+    state.subTotal = 0;
+    state.items = [];
   },
 });
 

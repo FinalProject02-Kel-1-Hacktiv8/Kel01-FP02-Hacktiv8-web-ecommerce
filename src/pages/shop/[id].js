@@ -7,8 +7,8 @@ export default function DetailProduct({ detailPage }) {
   return (
     <div className="container mx-auto mt-5">
       <Navbar />
-      <section class="text-gray-400 body-font overflow-hidden">
-        <div class="container px-5 py-24 mx-auto">
+      <section className="text-gray-400 body-font overflow-hidden">
+        <div className="container px-5 py-24 mx-auto">
           <CardDetails data={detailPage} />
         </div>
       </section>
