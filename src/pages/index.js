@@ -13,13 +13,10 @@ export default function Home() {
     dispatch(fetchDataProduct("/products"));
   }, [dispatch]);
 
-  console.log("data", products);
   return (
     <div className="container mx-auto mt-5">
       <Navbar />
-      {/* <Carousel /> */}
       <Card />
-      {/* <Carousel /> */}
     </div>
   );
 }

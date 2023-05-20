@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 export default function NavbarComponent() {
   const { token } = useSelector((state) => state.users);
-  console.log("token", token);
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -31,7 +31,7 @@ export default function NavbarComponent() {
           <Navlink item="calaboration" href="/calaboration" isMobile />
           <Navlink item="checkout" href="/checkout" isMobile />
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-xl">Toko Gally</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <Navlink item="home" href="/" />

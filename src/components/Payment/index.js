@@ -12,20 +12,19 @@ export default function Payment() {
   const dispatch = useDispatch();
   const { subTotal, shipping, items } = useSelector((state) => state.cart);
   const totals = parseFloat(subTotal) + shipping;
-  const cartP = [];
+  const dataItems = [];
   for (const item of items) {
-    cartP.push({ productId: item.id, quantity: item.quantity });
+    dataItems.push({ productId: item.id, quantity: item.quantity });
   }
   const today = new Date();
   const payload = {
     userId: 1,
     date: moment(today).format("YYYY-MM-DD"),
-    products: cartP,
+    products: dataItems,
   };
 
   const addCartMutation = useMutation((data) => postData("/carts", data), {
-    onSuccess: (res) => {
-      console.log("resCart", res);
+    onSuccess: () => {
       router.replace("/");
       dispatch(clearItem());
     },
@@ -34,7 +33,7 @@ export default function Payment() {
   const handleCheckout = async () => {
     await addCartMutation.mutate(payload);
   };
-  console.log("payload", payload);
+
   return (
     <section className="h-screen py-12 sm:py-16 lg:py-20 mb-10">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 mb-10">
@@ -82,11 +81,11 @@ export default function Payment() {
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                    stroke-width="2"
+                    strokeWidth="2"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M13 7l5 5m0 0l-5 5m5-5H6"
                     />
                   </svg>

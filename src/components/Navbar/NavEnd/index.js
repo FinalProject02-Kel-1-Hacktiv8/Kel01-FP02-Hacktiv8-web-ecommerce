@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function NavEnd({ isToken }) {
   const dispatch = useDispatch();
-  const { totalQuantity } = useSelector((state) => state.cart);
+  const { totalQuantity, subTotal } = useSelector((state) => state.cart);
   return isToken ? (
     <>
       <div className="dropdown dropdown-end mr-5">
@@ -41,7 +41,7 @@ export default function NavEnd({ isToken }) {
         >
           <div className="card-body">
             <span className="font-bold text-lg">{totalQuantity} Items</span>
-            <span className="text-info">Subtotal: $999</span>
+            <span className="text-info">Subtotal: ${subTotal.toFixed(2)}</span>
             <div className="card-actions">
               <Link className="btn btn-primary btn-block" href={"/checkout"}>
                 View cart

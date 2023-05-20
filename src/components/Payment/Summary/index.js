@@ -12,7 +12,10 @@ export default function Summary() {
     <div className="flow-root">
       <ul className="-my-8">
         {items?.map((item) => (
-          <li className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+          <li
+            className="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0"
+            key={item?.id}
+          >
             <div className="shrink-0">
               <img
                 className="h-24 w-24 max-w-full rounded-lg object-cover"
@@ -87,9 +90,9 @@ export default function Summary() {
                     stroke="currentColor"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                       className=""
                     ></path>
