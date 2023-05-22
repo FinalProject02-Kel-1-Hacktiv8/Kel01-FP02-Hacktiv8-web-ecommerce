@@ -16,7 +16,7 @@ const sliceUpdateProduct = createSlice({
       } else {
         state.items.push({
           ...action.payload,
-          stock: 10,
+          stock: 30,
           terjual: 15,
         });
       }
