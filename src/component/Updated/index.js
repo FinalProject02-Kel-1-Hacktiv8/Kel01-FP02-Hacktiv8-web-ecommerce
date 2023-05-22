@@ -3,11 +3,9 @@ import { useDispatch } from "react-redux";
 import { updateStock } from "../../redux/slice/update-slice";
 
 export default function Updated({ item }) {
-  // console.log("item", item);
   const dispatch = useDispatch();
   const [stock, setStock] = useState(0);
   const [modal, setModal] = useState(false);
-  const [isMutating, setIsMutating] = useState(false);
 
   const handleChange = () => {
     setModal(!modal);
@@ -21,7 +19,6 @@ export default function Updated({ item }) {
     };
     dispatch(updateStock(payload));
     setModal(false);
-    setIsMutating(false);
   };
   return (
     <div className="my-4">
@@ -52,15 +49,9 @@ export default function Updated({ item }) {
               <button type="button" className="btn" onClick={handleChange}>
                 Close
               </button>
-              {!isMutating ? (
-                <button type="submit" className="btn btn-primary">
-                  Save
-                </button>
-              ) : (
-                <button type="button" disabled className="btn loading">
-                  Saving...
-                </button>
-              )}
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
             </div>
           </form>
         </div>

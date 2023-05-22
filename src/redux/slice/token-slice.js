@@ -7,15 +7,16 @@ const sliceToken = createSlice({
   },
   reducers: {
     addtoken: (state, action) => {
-      state.email = action.payload;
+      state.email = btoa(action.payload);
       if (state.email !== "") {
-        const parseData = JSON.stringify(action.payload);
-        localStorage.setItem("tkn", parseData);
+        const payload = JSON.stringify(btoa(action.payload));
+        localStorage.setItem("tkn", payload);
       }
     },
     deleteToken: (state) => {
       if (state.email !== "") {
         localStorage.removeItem("tkn");
+        state.email = "";
       }
     },
   },

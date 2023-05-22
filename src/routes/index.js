@@ -1,11 +1,11 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import Login from "../pages/Login";
+import { Route, Routes } from "react-router-dom";
 import GuestOnlyRoute from "../component/GuardOnlyRoute";
 import GuardRoute from "../component/GuardRoute";
+import Login from "../pages/Login";
 
-import ProductRoute from "./ProductRoute";
 import Navbar from "../component/Navbar";
 import HomeRoute from "./HomeRoute";
+import ProductRoute from "./ProductRoute";
 import RekapRoute from "./RekapRoute";
 
 export function AppRoutes() {

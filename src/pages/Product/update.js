@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Updated from "../../component/Updated";
+import { deleteMessage } from "../../redux/slice/update-slice";
 import { getData } from "../../utils/fetch";
-import { messageChange } from "../../redux/slice/update-slice";
 
 export default function Update() {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ export default function Update() {
   const item = items?.find((el) => el?.id === data?.id);
 
   setTimeout(() => {
-    dispatch(messageChange());
+    dispatch(deleteMessage());
   }, 2000);
   return (
     <div className="overflow-x-auto mt-24">
@@ -48,13 +48,11 @@ export default function Update() {
         <></>
       )}
       <table className="table w-full">
-        {/* head*/}
         <thead>
           <tr>
             <th></th>
             <th>Image</th>
             <th>Title</th>
-            <th>Description</th>
             <th>Category</th>
             <th>Stock</th>
             <th>Action</th>
@@ -68,9 +66,6 @@ export default function Update() {
             </td>
             <td>
               <h4>{item?.title}</h4>
-            </td>
-            <td>
-              <h4>category</h4>
             </td>
             <td>
               <h4>{item?.category}</h4>

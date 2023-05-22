@@ -1,12 +1,9 @@
 import React from "react";
 import Navlink from "./Navlink";
 import NavEnd from "./NavEnd";
-// import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function NavbarComponent() {
-  // const { token } = useSelector((state) => state.users);
-  // const { token } = useSelector((state) => state.users);
-
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -27,22 +24,21 @@ export default function NavbarComponent() {
               />
             </svg>
           </label>
-          <Navlink item="home" to="/" isMobile />
+          <Navlink item="Dashboard" to="/" isMobile />
           <Navlink item="Product" to="/product" isMobile />
-          <Navlink item="calaboration" to="/calaboration" isMobile />
-          <Navlink item="checkout" to="/checkout" isMobile />
+          <Navlink item="Rekap" to="/rekap-penjualan" isMobile />
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Toko Gally</a>
+        <Link className="normal-case text-xl" to="/">
+          Toko Gally
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <Navlink item="home" to="/" />
+        <Navlink item="Dashboard" to="/" />
         <Navlink item="Product" to="/product" />
-        <Navlink item="rekap" to="/rekap-penjualan" />
-        <Navlink item="checkout" to="/checkout" />
+        <Navlink item="Rekap" to="/rekap-penjualan" />
       </div>
       <div className="navbar-end">
         <NavEnd />
-        {/* {!token ? <NavEnd /> : <NavEnd isToken />} */}
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ export default function RekapPenjualan() {
   return (
     <div className="overflow-x-auto mt-24">
       <table className="table w-full">
-        {/* head*/}
         <thead>
           <tr>
             <th></th>
@@ -22,7 +21,6 @@ export default function RekapPenjualan() {
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
           {items?.map((rekap, i) => (
             <tr key={rekap?.id}>
               <th>{i + 1}</th>

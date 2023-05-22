@@ -23,23 +23,23 @@ export default function Login() {
   };
 
   return (
-    <section class="text-gray-400 bg-gray-900 body-font">
-      <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-        <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-          <h1 class="title-font font-medium text-3xl text-white">
+    <section className="text-gray-400 bg-gray-900 body-font">
+      <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+        <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
+          <h1 className="title-font font-medium text-3xl text-white">
             Slow-carb next level shoindxgoitch ethical authentic, poko scenester
           </h1>
-          <p class="leading-relaxed mt-4">
+          <p className="leading-relaxed mt-4">
             Poke slow-carb mixtape knausgaard, typewriter street art gentrify
             hammock starladder roathse. Craies vegan tousled etsy austin.
           </p>
         </div>
-        <div class="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-          <h2 class="text-white text-lg font-medium title-font mb-5">
+        <div className="lg:w-2/6 md:w-1/2 bg-gray-800 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+          <h2 className="text-white text-lg font-medium title-font mb-5">
             Sign Up
           </h2>
           <form>
-            <div class="relative mb-4">
+            <div className="relative mb-4">
               <Input
                 label="Email"
                 type="email"
@@ -49,7 +49,7 @@ export default function Login() {
                 placeholder="email address"
               />
             </div>
-            <div class="relative mb-4">
+            <div className="relative mb-4">
               <Input
                 label="Password"
                 type="password"
@@ -62,12 +62,12 @@ export default function Login() {
             <button
               type="submit"
               onClick={handleSubmitForm}
-              class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              className="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
             >
               Button
             </button>
           </form>
-          <p class="text-xs mt-3">
+          <p className="text-xs mt-3">
             Literally you probably haven't heard of them jean shorts.
           </p>
         </div>

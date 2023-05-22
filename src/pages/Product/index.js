@@ -19,7 +19,6 @@ export default function Products() {
   return (
     <div className="overflow-x-auto mt-24">
       <table className="table w-full">
-        {/* head*/}
         <thead>
           <tr>
             <th></th>
@@ -27,12 +26,10 @@ export default function Products() {
             <th>Title</th>
             <th>Description</th>
             <th>Category</th>
-            <th>Stock</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {/* row 1 */}
           {data?.map((item, i) => (
             <tr key={item?.id}>
               <th>{i + 1}</th>
@@ -41,15 +38,13 @@ export default function Products() {
               </td>
               <td>
                 <h4>{item?.title}</h4>
-                {/* <h4>{item?.description}</h4> */}
               </td>
               <td>
-                <h4>category</h4>
+                <h4 className="line-clamp-3">{item?.description}</h4>
               </td>
               <td>
                 <h4>{item?.category}</h4>
               </td>
-              <td>20</td>
               <td>
                 <button
                   type="button"

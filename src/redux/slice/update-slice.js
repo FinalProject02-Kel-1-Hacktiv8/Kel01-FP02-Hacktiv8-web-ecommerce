@@ -8,10 +8,10 @@ const sliceUpdateProduct = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
-      const existingProduct = state.items.find(
-        (e) => e.id === action.payload.id
+      const currentProduct = state.items.find(
+        (item) => item.id === action.payload.id
       );
-      if (existingProduct) {
+      if (currentProduct) {
         return;
       } else {
         state.items.push({
@@ -23,19 +23,19 @@ const sliceUpdateProduct = createSlice({
     },
     updateStock: (state, action) => {
       const id = action.payload.id;
-      const existingProduct = state.items.find((e) => e.id === id);
-      if (existingProduct) {
+      const currentProduct = state.items.find((item) => item.id === id);
+      if (currentProduct) {
         const addStock = Number(action.payload.stock);
-        existingProduct.stock += addStock;
-        state.message = `Berhasil Update Stock "${existingProduct.title}"`;
+        currentProduct.stock += addStock;
+        state.message = `Berhasil Update Stock "${currentProduct.title}"`;
       }
     },
-    messageChange: (state) => {
+    deleteMessage: (state) => {
       state.message = "";
     },
   },
 });
 
-export const { addItem, updateStock, messageChange } =
+export const { addItem, updateStock, deleteMessage } =
   sliceUpdateProduct.actions;
 export default sliceUpdateProduct.reducer;
