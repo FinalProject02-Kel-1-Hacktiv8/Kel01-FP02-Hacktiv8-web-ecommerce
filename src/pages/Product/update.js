@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { fetchData } from "../../redux/slice/product-slice";
-import { addItem } from "../../redux/slice/update-slice";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { getData } from "../../utils/fetch";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Updated from "../../component/Updated";
+import { getData } from "../../utils/fetch";
+import { messageChange } from "../../redux/slice/update-slice";
 
 export default function Update() {
   const dispatch = useDispatch();
   const { updateId } = useParams();
-  const { items } = useSelector((state) => state.update);
+  const { items, message } = useSelector((state) => state.update);
 
   const fetchProduct = async () => {
     const res = await getData(`/products/${updateId}`);
@@ -18,11 +17,36 @@ export default function Update() {
   };
   const { data } = useQuery("product", fetchProduct);
   const item = items?.find((el) => el?.id === data?.id);
-  // useEffect(() => {
-  //   dispatch(addItem(data));
-  // }, []);
+
+  setTimeout(() => {
+    dispatch(messageChange());
+  }, 2000);
   return (
     <div className="overflow-x-auto mt-24">
+      {message !== "" ? (
+        <div className="flex justify-center mb-10">
+          <div className="alert alert-success  shadow-lg w-1/2">
+            <div className="flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="stroke-current flex-shrink-0 h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{message}</span>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <table className="table w-full">
         {/* head*/}
         <thead>
@@ -56,7 +80,6 @@ export default function Update() {
               <Updated item={data} />
             </td>
           </tr>
-          {/* ))} */}
         </tbody>
       </table>
     </div>

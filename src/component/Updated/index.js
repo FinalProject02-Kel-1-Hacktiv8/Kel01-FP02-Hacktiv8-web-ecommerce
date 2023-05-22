@@ -20,8 +20,8 @@ export default function Updated({ item }) {
       stock,
     };
     dispatch(updateStock(payload));
-    setIsMutating(false);
     setModal(false);
+    setIsMutating(false);
   };
   return (
     <div className="my-4">
