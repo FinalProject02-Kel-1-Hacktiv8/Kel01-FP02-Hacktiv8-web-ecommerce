@@ -6,11 +6,10 @@ This is The Final Project for Hacktiv8 by Making The Web Ecommerce using NEXT.JS
 
 ## 👨‍💻 Team
 
-| Author                      | Nim Hacktiv8  |
-| --------------------------- | ------------- |
-| Rachmat Ghaly               | RCTN-KS07-015 |
-| Bilal Al Ghiffari           | RCTN-KS07-006 |
-| ABEL PRATAMA RAMADHAN LULUT | RCTN-KS07-019 |
+| Author            | Nim Hacktiv8  |
+| ----------------- | ------------- |
+| Rachmat Ghaly     | RCTN-KS07-015 |
+| Bilal Al Ghiffari | RCTN-KS07-006 |
 
 ## 🛠️ Tech Stack & Tools
 
