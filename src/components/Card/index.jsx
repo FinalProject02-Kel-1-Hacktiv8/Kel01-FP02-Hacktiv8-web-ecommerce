@@ -21,20 +21,20 @@ export default function Card({ type }) {
       )}
       <div className="grid grid-cols-4 gap-5">
         {type === "shop"
-          ? data?.map((item) => {
+          ? data?.map((item, index) => {
               return (
-                <>
+                <div key={index}>
                   <CardItem card={item} key={item?.id} />
-                  <CardDetails data={item} key={item?.id} />
-                </>
+                  <CardDetails data={item} key={index} />
+                </div>
               );
             })
-          : data?.slice(0, 8).map((item) => {
+          : data?.slice(0, 8).map((item, index) => {
               return (
-                <>
+                <div key={index}>
                   <CardItem card={item} key={item?.id} />
-                  <CardDetails data={item} key={item?.id} />
-                </>
+                  <CardDetails data={item} key={index} />
+                </div>
               );
             })}
       </div>
