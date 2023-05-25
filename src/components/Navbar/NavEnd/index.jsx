@@ -1,7 +1,13 @@
+import Button from "@/components/Button";
+import { deleteToken } from "@/redux/slice/slice-token";
+import Link from "next/link";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function NavEnd({ isToken }) {
-  return isToken ? (
+export default function NavEnd({ isToken, role }) {
+  const dispatch = useDispatch();
+  const { totalQuantity, subTotal } = useSelector((state) => state.cart);
+  return isToken && role == "user" ? (
     <>
       <div className="dropdown dropdown-end mr-5">
         <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -20,18 +26,26 @@ export default function NavEnd({ isToken }) {
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <span className="badge badge-sm indicator-item">8</span>
+            {totalQuantity === 0 ? (
+              <></>
+            ) : (
+              <span className="badge badge-sm indicator-item">
+                {totalQuantity}
+              </span>
+            )}
           </div>
         </label>
         <div
           tabIndex={0}
-          className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+          className="mt-3 card card-compact dropdown-content w-52 bg-[rgb(46,52,65)] shadow"
         >
           <div className="card-body">
-            <span className="font-bold text-lg">8 Items</span>
-            <span className="text-info">Subtotal: $999</span>
+            <span className="font-bold text-lg">{totalQuantity} Items</span>
+            <span className="text-info">Subtotal: ${subTotal.toFixed(2)}</span>
             <div className="card-actions">
-              <button className="btn btn-primary btn-block">View cart</button>
+              <Link className="btn btn-primary btn-block" href={"/cart"}>
+                View cart
+              </Link>
             </div>
           </div>
         </div>
@@ -44,19 +58,46 @@ export default function NavEnd({ isToken }) {
         </label>
         <ul
           tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgb(46,52,65)] rounded-box w-52"
         >
           <li>
             <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
+              Ghaly
+              <span className="badge">User</span>
             </a>
           </li>
           <li>
             <a>Settings</a>
           </li>
           <li>
-            <a>Logout</a>
+            <a onClick={() => dispatch(deleteToken())}>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </>
+  ) : isToken && role == "admin" ? (
+    <>
+      <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="w-10 rounded-full ">
+            <i className="fas fa-user-circle text-4xl"></i>
+          </div>
+        </label>
+        <ul
+          tabIndex={0}
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgb(46,52,65)] rounded-box w-52"
+        >
+          <li>
+            <a className="justify-between">
+              Joni John
+              <span className="badge">Admin</span>
+            </a>
+          </li>
+          <li>
+            <a>Settings</a>
+          </li>
+          <li>
+            <a onClick={() => dispatch(deleteToken())}>Logout</a>
           </li>
         </ul>
       </div>
@@ -80,24 +121,13 @@ export default function NavEnd({ isToken }) {
                 d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <span className="badge badge-sm indicator-item">8</span>
           </div>
         </label>
-        <div
-          tabIndex={0}
-          className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
-        >
-          <div className="card-body">
-            <span className="font-bold text-lg">8 Items</span>
-            <span className="text-info">Subtotal: $999</span>
-            <div className="card-actions">
-              <button className="btn btn-primary btn-block">View cart</button>
-            </div>
-          </div>
-        </div>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Get started</a>
+      <div className="text-end">
+        <Link className="btn" href="/signin">
+          Login
+        </Link>
       </div>
     </>
   );
