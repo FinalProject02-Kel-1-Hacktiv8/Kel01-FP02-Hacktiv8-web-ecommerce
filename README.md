@@ -1,4 +1,6 @@
-# Final Project 02 Kel.01 - Web App Ecommerce [ JAJAN.id ]
+# Final Project 02 Kel.01
+
+# Web App Ecommerce [ JAJAN.id ]
 
 This is The Final Project for Hacktiv8 by Making The Web Ecommerce using NEXT.JS
 
