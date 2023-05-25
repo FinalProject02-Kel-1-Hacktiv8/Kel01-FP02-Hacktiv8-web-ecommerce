@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
 import Login from "@/components/Login";
-import Navbar from "@/components/Navbar";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function Signin() {
   const router = useRouter();
@@ -13,8 +12,8 @@ export default function Signin() {
     }
   }, [token, router]);
   return (
-    <div className="container mx-auto max-w-[1000px] mt-5">
+    <section className="container mx-auto max-w-[1000px] mt-5">
       <Login />
-    </div>
+    </section>
   );
 }

@@ -9,6 +9,7 @@ export default function App({ Component, ...rest }) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const persistore = persistStore(store);
   const queryClient = new QueryClient();
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistore}>
