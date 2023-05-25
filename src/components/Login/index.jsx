@@ -6,6 +6,7 @@ import { postData } from "@/Utils/fetch";
 import { useDispatch } from "react-redux";
 import { addToken } from "@/redux/slice/slice-token";
 import { useRouter } from "next/router";
+import { adminAccount } from "@/redux/slice/slice-token";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export default function Login() {
     (payload) => postData("/auth/login", payload),
     {
       onSuccess: (res) => {
-        dispatch(addToken(res.token));
+        dispatch(addToken({ token: res.token, role: "user" }));
         router.prefetch("/");
       },
     }
@@ -36,7 +37,17 @@ export default function Login() {
         username: form.username,
         password: form.password,
       };
-      await addUserMutation.mutate(payload);
+      if (
+        payload.username == adminAccount.username &&
+        payload.password == adminAccount.password
+      ) {
+        dispatch(
+          addToken({ token: adminAccount.token, role: adminAccount.role })
+        );
+        router.prefetch("/");
+      } else {
+        await addUserMutation.mutate(payload);
+      }
     },
     [addUserMutation]
   );
@@ -48,7 +59,7 @@ export default function Login() {
           <h1 className="text-5xl font-bold">
             Login to{" "}
             <span className="flex pt-3">
-              <i class="fa-solid fa-bag-shopping pr-2 text-purple-600"></i>{" "}
+              <i className="fa-solid fa-bag-shopping pr-2 text-purple-600"></i>{" "}
               JAJAN.id
             </span>
           </h1>
@@ -62,7 +73,7 @@ export default function Login() {
                 name="username"
                 value={form.username}
                 onChange={onChangeInput}
-                placeholder="email address"
+                placeholder="username"
                 type="text"
               />
               <Input
