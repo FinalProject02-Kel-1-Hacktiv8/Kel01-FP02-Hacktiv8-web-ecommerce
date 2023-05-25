@@ -23,6 +23,13 @@ This is The Final Project for Hacktiv8 by Making The Web Ecommerce using NEXT.JS
 
 ## Getting Started
 
+## 👨 Login Admin & User
+
+| Account | Username | Password |
+| ------- | -------- | -------- |
+| Admin   | admin    | admin123 |
+| User    | mor_2314 | 83r5^\_  |
+
 First, run the development server:
 
 ```bash
