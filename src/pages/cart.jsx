@@ -2,16 +2,29 @@ import { CartSummary } from "@/components/Payment/Summary/cart-summary";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import Image from "next/image";
+import cartEmpty from "/public/cart-empty.png";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Cart() {
   const { subTotal, shipping, totalQuantity, items } = useSelector(
     (state) => state.cart
   );
-
+  const router = useRouter();
+  const { token, role } = useSelector((state) => state.users);
   const totals = parseFloat(subTotal) + shipping;
 
+  useEffect(() => {
+    if (!token) {
+      router.push("/signin");
+    } else if (role != "user") {
+      router.push("/");
+    }
+  }, [token, router, role]);
+
   return (
-    <div className="container mx-auto max-w-[1000px] mt-5">
+    <section className="container mx-auto max-w-[1000px] mt-5">
       <Navbar />
       <div className="flex flex-row justify-between bg-white mt-8 min-h-[600px] rounded-xl shadow-lg">
         <div className="p-5 pr-0">
@@ -23,13 +36,31 @@ export default function Cart() {
           </ul>
           <h2 className="text-slate-800 title-font text-2xl font-bold">Cart</h2>
 
-          {items.map((item) => {
-            return <CartSummary key={item.productId} item={item} />;
-          })}
+          {totalQuantity > 0 ? (
+            items.map((item) => {
+              return <CartSummary key={item.id} item={item} />;
+            })
+          ) : (
+            <div className="flex flex-col items-center">
+              <Image
+                src={cartEmpty}
+                width={250}
+                height={250}
+                priority={true}
+                alt={`Cart is Empty`}
+              />
+              <h3 className="text-lg text-base-100 font-bold">
+                Oops! Your Cart is Empty!
+              </h3>
+              <p className="text-base-100">
+                Looks like you haven't added anything to your cart yet
+              </p>
+            </div>
+          )}
         </div>
         <div className="w-96 p-6">
           {/* CART SUMMARY */}
-          <div className="card w-full bg-base-100 shadow-xl h-[400px] p-5 flex flex-col justify-between">
+          <div className="card sticky top-20 w-80 bg-[rgb(42,48,60)] shadow-xl h-[400px] p-5 flex flex-col justify-between">
             <h2 className="text-white title-font text-xl font-medium">
               Cart Summary
             </h2>
@@ -61,6 +92,6 @@ export default function Cart() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

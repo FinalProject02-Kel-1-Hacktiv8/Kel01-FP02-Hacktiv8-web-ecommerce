@@ -17,15 +17,19 @@ export const cartSlice = createSlice({
         existingItem.quantity++;
         existingItem.stock--;
       } else {
-        state.items.push({
-          ...cartItem,
-          quantity: 1,
-          stock: 20 - 1,
-        });
+        state.items.push(cartItem);
       }
 
       state.totalQuantity++;
       state.subTotal += cartItem.price;
+    },
+    updateStockCart: (state, action) => {
+      const products = action.payload;
+      const existingItem = state.items.find((item) => item.id === products.id);
+
+      if (existingItem) {
+        existingItem.stock = Number(products.stock) - existingItem.quantity;
+      }
     },
     removeItem: (state, action) => {
       const id = action.payload.id;
@@ -69,5 +73,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, clearItem, removeCart } = cartSlice.actions;
+export const { addItem, updateStockCart, removeItem, clearItem, removeCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;
