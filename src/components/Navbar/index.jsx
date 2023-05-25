@@ -4,10 +4,10 @@ import NavEnd from "./NavEnd";
 import { useSelector } from "react-redux";
 
 export default function NavbarComponent() {
-  const { token } = useSelector((state) => state.users);
+  const { token, role } = useSelector((state) => state.users);
 
   return (
-    <nav className="navbar bg-base-100 p-0 flex items-center justify-center sticky top-0 z-30 md:h-[60px] h-[110px] w-full">
+    <nav className="navbar bg-[rgb(42,48,60)] p-0 flex items-center justify-center sticky top-0 z-30 md:h-[60px] h-[110px] w-full">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -26,23 +26,43 @@ export default function NavbarComponent() {
               />
             </svg>
           </label>
-          <Navlink item="Home" href="/" isMobile />
-          <Navlink item="Shop" href="shop" isMobile />
-          <Navlink item="Calaboration" href="/calaboration" isMobile />
-          <Navlink item="Checkout" href="/checkout" isMobile />
+          {token && role == "admin" ? (
+            <>
+              <Navlink item="Dashboard" href="/" isMobile />
+              <Navlink item="Products" href="/admin/product" isMobile />
+              <Navlink item="Sells Report" href="/admin/report" isMobile />
+            </>
+          ) : (
+            <>
+              <Navlink item="Home" href="/" isMobile />
+              <Navlink item="Shop" href="shop" isMobile />
+              <Navlink item="Calaboration" href="/calaboration" isMobile />
+              <Navlink item="Checkout" href="/checkout" isMobile />
+            </>
+          )}
         </div>
         <a className="btn btn-ghost normal-case text-xl text-purple-300">
-          <i class="fa-solid fa-bag-shopping pr-2 text-purple-600"></i> JAJAN.id
+          <i className="fa-solid fa-bag-shopping pr-2 text-purple-600"></i>{" "}
+          JAJAN.id
         </a>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <Navlink item="Home" href="/" />
-        <Navlink item="Shop" href="/shop" />
-        <Navlink item="Calaboration" href="/calaboration" />
-        <Navlink item="Checkout" href="/checkout" />
-      </div>
-      <div className="navbar-end">
-        {!token ? <NavEnd /> : <NavEnd isToken />}
+      {token && role == "admin" ? (
+        <div className="navbar-center hidden lg:flex dark:text-slate-300 text-slate-300">
+          <Navlink item="Dashboard" href="/" />
+          <Navlink item="Products" href="/admin/product" />
+          <Navlink item="Sells Report" href="/admin/report" />
+        </div>
+      ) : (
+        <div className="navbar-center hidden lg:flex dark:text-slate-300 text-slate-300">
+          <Navlink item="Home" href="/" />
+          <Navlink item="Shop" href="/shop" />
+          <Navlink item="Calaboration" href="/calaboration" />
+          <Navlink item="Checkout" href="/checkout" />
+        </div>
+      )}
+
+      <div className="navbar-end dark:text-slate-300 text-slate-300">
+        {!token ? <NavEnd /> : <NavEnd isToken={token} role={role} />}
       </div>
     </nav>
   );
