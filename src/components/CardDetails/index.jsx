@@ -1,19 +1,31 @@
-import React from "react";
-import Detail from "./Detail";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
 import { addItem, removeItem } from "@/redux/slice/slice-cart";
+import { addStock } from "@/redux/slice/slice-update";
+import Image from "next/image";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CardDetails({ data }) {
   const router = useRouter();
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.cart);
-
-  const { token } = useSelector((state) => state.users);
+  const existingItem = items.find((item) => item?.id === data?.id);
+  const { token, role } = useSelector((state) => state.users);
 
   const handleAddCart = () => {
-    !token ? router.push("/signin") : dispatch(addItem(data));
+    if (!token && role != "user") {
+      router.push("/signin");
+    } else {
+      let payload = {
+        id: data?.id,
+        quantity: 1,
+        stock: 20 - 1,
+      };
+      dispatch(
+        addItem({ ...data, quantity: payload.quantity, stock: payload.stock })
+      );
+
+      dispatch(addStock({ id: payload.id, stock: payload.stock }));
+    }
   };
 
   const handleSubtractCart = (itemQuantity) => {
@@ -28,16 +40,6 @@ export default function CardDetails({ data }) {
   }`;
 
   return (
-    // <div className="lg:w-4/5 lg:justify-center mx-auto flex flex-wrap">
-    //   <Image
-    //     src={data?.image}
-    //     className="lg:w-1/3 w-full lg:h-auto h-64 object-cover object-center rounded"
-    //     width={400}
-    //     height={400}
-    //     alt="detailsImage"
-    //   />
-    //   <Detail item={data} />
-    // </div>
     <>
       <input type="checkbox" id={data.title} className="modal-toggle" />
       <div className="modal">
@@ -66,25 +68,25 @@ export default function CardDetails({ data }) {
               <h3 className="text-gray-500 text-sm tracking-widest title-font mb-1">
                 {data.category ?? "Product category is not found"}
               </h3>
-              <h2 className="card-title">{data.title}</h2>
-              <p className="mt-1">
+              <h2 className="card-title text-slate-100">{data.title}</h2>
+              <p className="mt-1 text-gray-400">
                 <i className="fa-solid fa-star text-yellow-400 mr-[5px]"></i>
                 {data.rating.rate ?? "Product rate is not found"} |{" "}
                 {data.rating.count} Sold
               </p>
 
-              <p className="mt-1 font-semibol text-2xl">
+              <p className="mt-1 font-semibol text-2xl text-slate-300">
                 ${data.price ?? "Product price is not found"}
               </p>
-              <p>
+              <p className="text-gray-400">
                 <p className="font-semibold">Product description:</p>
                 {data?.description}
               </p>
-              <p className="font-semibold">Quantity:</p>
+              <p className="font-semibold text-gray-400">Quantity:</p>
               <div className="flex flex-row items-center">
-                {items.length >= 0 && token ? (
+                {existingItem ? (
                   items?.map((item) =>
-                    item?.id === data?.id ? (
+                    item?.id === data?.id && token ? (
                       <>
                         <div className="btn-group" key={item.id}>
                           <button
@@ -96,7 +98,7 @@ export default function CardDetails({ data }) {
                           >
                             -
                           </button>
-                          <p className="btn">{item?.quantity}</p>
+                          <p className="btn text-slate-300">{item?.quantity}</p>
                           <button
                             className="btn text-lg"
                             onClick={handleAddCart}
@@ -104,7 +106,7 @@ export default function CardDetails({ data }) {
                             +
                           </button>
                         </div>
-                        <p className="mt-1 font-semibol text-xl flex justify-between pl-2">
+                        <p className="mt-1 font-semibol text-xl text-slate-300 flex justify-between pl-2">
                           <p>Subtotal: </p>$
                           {Number(item?.price * item?.quantity).toFixed(2) ?? 0}
                         </p>
@@ -116,12 +118,10 @@ export default function CardDetails({ data }) {
                 ) : (
                   <>
                     <div className="btn-group">
-                      <button className="btn text-lg">-</button>
                       <p className="btn">{0}</p>
-                      <button className="btn text-lg">+</button>
                     </div>
-                    <p className="mt-1 font-semibol text-xl flex justify-between pl-2">
-                      <p>Subtotal: </p>${0}
+                    <p className="mt-1 font-semibol text-xl flex text-end gap-3">
+                      <p>Subtotal: </p> ${0}
                     </p>
                   </>
                 )}
