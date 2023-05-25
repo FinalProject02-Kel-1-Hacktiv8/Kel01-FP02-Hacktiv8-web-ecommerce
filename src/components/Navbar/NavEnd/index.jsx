@@ -4,10 +4,10 @@ import Link from "next/link";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function NavEnd({ isToken }) {
+export default function NavEnd({ isToken, role }) {
   const dispatch = useDispatch();
   const { totalQuantity, subTotal } = useSelector((state) => state.cart);
-  return isToken ? (
+  return isToken && role == "user" ? (
     <>
       <div className="dropdown dropdown-end mr-5">
         <label tabIndex={0} className="btn btn-ghost btn-circle">
@@ -37,7 +37,7 @@ export default function NavEnd({ isToken }) {
         </label>
         <div
           tabIndex={0}
-          className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow"
+          className="mt-3 card card-compact dropdown-content w-52 bg-[rgb(46,52,65)] shadow"
         >
           <div className="card-body">
             <span className="font-bold text-lg">{totalQuantity} Items</span>
@@ -58,12 +58,39 @@ export default function NavEnd({ isToken }) {
         </label>
         <ul
           tabIndex={0}
-          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgb(46,52,65)] rounded-box w-52"
         >
           <li>
             <a className="justify-between">
-              Profile
-              <span className="badge">New</span>
+              Ghaly
+              <span className="badge">User</span>
+            </a>
+          </li>
+          <li>
+            <a>Settings</a>
+          </li>
+          <li>
+            <a onClick={() => dispatch(deleteToken())}>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </>
+  ) : isToken && role == "admin" ? (
+    <>
+      <div className="dropdown dropdown-end">
+        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <div className="w-10 rounded-full ">
+            <i className="fas fa-user-circle text-4xl"></i>
+          </div>
+        </label>
+        <ul
+          tabIndex={0}
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-[rgb(46,52,65)] rounded-box w-52"
+        >
+          <li>
+            <a className="justify-between">
+              Joni John
+              <span className="badge">Admin</span>
             </a>
           </li>
           <li>
