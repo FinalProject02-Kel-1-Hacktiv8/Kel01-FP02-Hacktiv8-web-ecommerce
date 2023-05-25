@@ -7,7 +7,7 @@ export default function Carousel() {
 
   return (
     <div className="carousel w-full mt-2 rounded-2xl">
-      {data.map((item) => (
+      {data?.map((item) => (
         <div
           id={item?.id}
           className={`carousel-item relative w-full`}
