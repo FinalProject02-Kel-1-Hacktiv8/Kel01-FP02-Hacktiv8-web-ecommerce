@@ -1,13 +1,16 @@
 import { CartSummary } from "@/components/Payment/Summary/cart-summary";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import cartEmpty from "/public/cart-empty.png";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { addItemCheckout } from "@/redux/slice/slice-checkout";
+import { clearItem } from "@/redux/slice/slice-cart";
 
 export default function Cart() {
+  const dispatch = useDispatch();
   const { subTotal, shipping, totalQuantity, items } = useSelector(
     (state) => state.cart
   );
@@ -22,6 +25,11 @@ export default function Cart() {
       router.push("/");
     }
   }, [token, router, role]);
+
+  const handleCheckout = () => {
+    dispatch(addItemCheckout({ subTotal, shipping, totalQuantity, items }));
+    dispatch(clearItem());
+  };
 
   return (
     <section className="container mx-auto max-w-[1000px] mt-5">
@@ -83,7 +91,10 @@ export default function Cart() {
                 </p>
               </p>
               <Link href={"/checkout"} className="w-full">
-                <button className="btn btn-primary btn-block">
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={handleCheckout}
+                >
                   Checkout (
                   <span className="text-lg px-1">{totalQuantity}</span>)
                 </button>

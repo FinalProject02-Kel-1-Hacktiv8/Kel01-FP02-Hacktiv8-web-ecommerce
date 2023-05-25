@@ -65,11 +65,11 @@ export const cartSlice = createSlice({
         }
       }
     },
-  },
-  clearItem: (state) => {
-    state.totalQuantity = 0;
-    state.subTotal = 0;
-    state.items = [];
+    clearItem: (state) => {
+      state.totalQuantity = 0;
+      state.subTotal = 0;
+      state.items = [];
+    },
   },
 });
 

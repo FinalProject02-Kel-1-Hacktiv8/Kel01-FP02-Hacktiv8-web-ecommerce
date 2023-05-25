@@ -9,7 +9,9 @@ import reportEmpty from "/public/report-not-found.gif";
 export default function SellsReport() {
   const router = useRouter();
 
-  const { subTotal, totalQuantity, items } = useSelector((state) => state.cart);
+  const { subTotal, totalQuantity, checkoutItems } = useSelector(
+    (state) => state.checkout
+  );
   const { token, role } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export default function SellsReport() {
                 </h3>
               </div>
             ) : (
-              items?.map((item, index) => (
+              checkoutItems?.map((item, index) => (
                 <CardReport item={item} number={index} />
               ))
             )}

@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-export const CheckoutSummary = ({ item }) => {
+export const CheckoutSummary = ({ data }) => {
   const srcImage = `${
-    item?.image ??
+    data?.image ??
     "https://wellesleysocietyofartists.org/wp-content/uploads/2015/11/image-not-found.jpg"
   }`;
   return (
@@ -15,14 +15,14 @@ export const CheckoutSummary = ({ item }) => {
           width={50}
           height={50}
           priority={true}
-          alt={`Product Image ${item?.title ?? "Product image is not found"}`}
+          alt={`Product Image ${data?.title ?? "Product image is not found"}`}
         />
         <div className="px-5">
-          <p>{item?.title}</p>
-          <p>$ {item?.price}</p>
+          <p>{data?.title}</p>
+          <p>$ {data?.price}</p>
           <p>
             <span className="font-normal pr-2">Amount:</span>
-            {item?.quantity}
+            {data?.quantity}
           </p>
         </div>
       </div>

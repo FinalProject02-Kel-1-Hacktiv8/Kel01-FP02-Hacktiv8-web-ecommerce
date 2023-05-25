@@ -5,6 +5,7 @@ import { createWrapper } from "next-redux-wrapper";
 import productsReducers from "../slice/slice-products";
 import userReducers from "../slice/slice-token";
 import cartReducers from "../slice/slice-cart";
+import checkoutReducers from "../slice/slice-checkout";
 import updateProductReducers from "../slice/slice-update";
 
 const persistConfig = {
@@ -17,6 +18,7 @@ const rootReducers = combineReducers({
   products: productsReducers,
   users: userReducers,
   cart: cartReducers,
+  checkout: checkoutReducers,
   updateProduct: updateProductReducers,
 });
 

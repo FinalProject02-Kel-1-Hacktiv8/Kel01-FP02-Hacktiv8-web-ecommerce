@@ -1,4 +1,5 @@
 import { addItem, removeItem } from "@/redux/slice/slice-cart";
+import { addItemCheckout, removeCheckout } from "@/redux/slice/slice-checkout";
 import { addStock } from "@/redux/slice/slice-update";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -20,17 +21,21 @@ export default function CardDetails({ data }) {
         quantity: 1,
         stock: 20 - 1,
       };
-      dispatch(
-        addItem({ ...data, quantity: payload.quantity, stock: payload.stock })
-      );
-
-      dispatch(addStock({ id: payload.id, stock: payload.stock }));
+      if (existingItem?.stock <= 0) {
+        alert("Out of Stock!");
+      } else {
+        dispatch(
+          addItem({ ...data, quantity: payload.quantity, stock: payload.stock })
+        );
+        dispatch(addStock({ id: payload.id, stock: payload.stock }));
+      }
     }
   };
 
   const handleSubtractCart = (itemQuantity) => {
     if (itemQuantity > 0) {
       dispatch(removeItem(data));
+      // dispatch(removeCheckout(data));
     }
   };
 
@@ -131,10 +136,6 @@ export default function CardDetails({ data }) {
                 <button className="btn btn-primary" onClick={handleAddCart}>
                   <i className="fa-solid fa-cart-shopping pr-2"></i>
                   Add to Cart
-                </button>
-
-                <button className="btn btn-primary">
-                  <i className="fa-solid fa-bag-shopping pr-2"></i>Checkout
                 </button>
               </div>
             </div>

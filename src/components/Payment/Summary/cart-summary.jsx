@@ -6,8 +6,10 @@ export const CartSummary = ({ item }) => {
   const dispatch = useDispatch();
 
   const handleAddCart = () => {
-    if (item?.stock >= 1) {
+    if (item?.stock != 0) {
       dispatch(addItem(item));
+    } else {
+      alert("Out of Stock!");
     }
   };
 

@@ -8,8 +8,8 @@ import { useEffect } from "react";
 import { CheckoutSummary } from "@/components/Payment/Summary/checkout-summary";
 
 export default function Checkout() {
-  const { subTotal, shipping, totalQuantity, items } = useSelector(
-    (state) => state.cart
+  const { subTotal, shipping, totalQuantity, checkoutItems } = useSelector(
+    (state) => state.checkout
   );
   const router = useRouter();
   const { token, role } = useSelector((state) => state.users);
@@ -58,8 +58,8 @@ export default function Checkout() {
           </div>
           <div className="overflow-y-auto max-h-[300px]">
             {totalQuantity > 0 ? (
-              items.map((item) => {
-                return <CheckoutSummary key={item.productId} item={item} />;
+              checkoutItems?.map((item) => {
+                return <CheckoutSummary key={item?.Id} data={item} />;
               })
             ) : (
               <div className="flex flex-col items-center">
@@ -71,11 +71,9 @@ export default function Checkout() {
                   alt={`Cart is Empty`}
                 />
                 <h3 className="text-lg text-base-100 font-bold">
-                  Oops! Your Cart is Empty!
+                  Oops! You haven't checkout yet!
                 </h3>
-                <p className="text-base-100">
-                  Looks like you haven't added anything to your cart yet
-                </p>
+                <p className="text-base-100">Let's make some checkout</p>
               </div>
             )}
           </div>
