@@ -11,6 +11,17 @@ This is The Final Project for Hacktiv8 by Making The Web Ecommerce using NEXT.JS
 | Rachmat Ghaly     | RCTN-KS07-015 |
 | Bilal Al Ghiffari | RCTN-KS07-006 |
 
+## 🛠️ The Result Preview
+
+👨 Login Admin & User
+
+| Account | Username | Password |
+| ------- | -------- | -------- |
+| Admin   | admin    | admin123 |
+| User    | mor_2314 | 83r5^\_  |
+
+Link : https://kel01-fp-02-hacktiv8-web-ecommerce.vercel.app
+
 ## 🛠️ Tech Stack & Tools
 
 - Next.Js
