@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
 
-export default function Navlink({ link, isMobile }) {
+export default function Navlink({ link, href, item, isMobile }) {
+  console.log(link);
   if (isMobile) {
     return (
       <ul
