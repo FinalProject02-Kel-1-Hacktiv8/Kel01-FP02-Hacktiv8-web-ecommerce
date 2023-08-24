@@ -34,7 +34,7 @@ export default function Cart() {
   return (
     <section className="container mx-auto max-w-[1000px] mt-5 px-3">
       <Navbar />
-      <div className="flex flex-col md:flex-row flex-wrap md:justify-between items-center md:items-start bg-white mt-8 min-h-[600px] rounded-xl shadow-lg">
+      <div className="flex flex-col md:flex-row md:justify-between items-center md:items-start bg-white mt-8 min-h-[600px] rounded-xl shadow-lg">
         <div className="p-5 md:pr-0">
           <ul className="steps md:w-[570px] text-slate-500 mb-1">
             <li className="step step-primary">Choose Items</li>
