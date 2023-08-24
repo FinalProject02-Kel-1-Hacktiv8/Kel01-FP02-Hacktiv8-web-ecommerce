@@ -8,9 +8,10 @@ import { useEffect } from "react";
 import { CheckoutSummary } from "@/components/Payment/Summary/checkout-summary";
 
 export default function Checkout() {
-  const { subTotal, shipping, totalQuantity, items } = useSelector(
-    (state) => state.cart
+  const { subTotal, shipping, totalQuantity, checkoutItems } = useSelector(
+    (state) => state.checkout
   );
+
   const router = useRouter();
   const { token } = useSelector((state) => state.users);
   const totals = parseFloat(subTotal) + shipping;
@@ -24,7 +25,7 @@ export default function Checkout() {
   return (
     <div className="container mx-auto max-w-[1000px] mt-5 px-3">
       <Navbar />
-      <div className="flex flex-col md:flex-row flex-wrap md:justify-between items-center md:items-start bg-white mt-8 min-h-[600px] rounded-xl shadow-lg">
+      <div className="flex flex-col md:flex-row md:justify-between items-center md:items-start bg-white mt-8 min-h-[600px] rounded-xl shadow-lg">
         <div className="p-5 md:pr-0">
           <ul className="steps md:w-[570px] text-slate-500 mb-1">
             <li className="step step-primary">Choose Items</li>
@@ -56,8 +57,8 @@ export default function Checkout() {
           </div>
           <div className="overflow-y-auto max-h-[300px]">
             {totalQuantity > 0 ? (
-              items.map((item) => {
-                return <CheckoutSummary key={item.productId} item={item} />;
+              checkoutItems?.map((item) => {
+                return <CheckoutSummary key={item?.Id} data={item} />;
               })
             ) : (
               <div className="flex flex-col items-center">
@@ -79,10 +80,10 @@ export default function Checkout() {
           </div>
         </div>
         <div className="w-96 p-6">
-          {/* CART SUMMARY */}
+          {/* PAYMENT SUMMARY */}
           <div className="card w-80 bg-base-100 shadow-xl h-[400px] p-5 flex flex-col justify-between">
             <h2 className="text-white title-font text-xl font-medium">
-              Cart Summary
+              Payment Summary
             </h2>
             <div>
               <p className="flex justify-between text-slate-200 title-font text-md font-semibold py-3 border-b-[1px] border-slate-300">
@@ -102,7 +103,7 @@ export default function Checkout() {
                   {totals.toFixed(2)}
                 </p>
               </p>
-              <Link href={"/checkout"} className="w-full">
+              <Link href={""} className="w-full">
                 <button className="btn btn-primary btn-block">
                   Payment (<span className="text-lg px-1">{totalQuantity}</span>
                   )
